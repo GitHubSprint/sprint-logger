@@ -20,7 +20,7 @@ public final class Logger
         private long logFileSize = 100000000;
         private String logFilePath = "logs/";       
 	private int logLevel = 1;	
-	private String logFileName = "sprintbot.ext.lib.mail"; 	
+	private String logFileName = "sprintbot.ext.lib"; 	
 	private static final Event<logMessageEventDelegate> logMessageEvent = new Event<logMessageEventDelegate>();
         private String className = ""; 
 
@@ -32,14 +32,27 @@ public final class Logger
             return strDate;
         } 
         
-        public void setLogger(int logLevel, String logFilePath, String logFileName, long logFileSize, String className)
+        
+        public void setLogger(String logFileName, Class<?> clazz)
+	{				
+		this.logFileName = logFileName;		
+		this.className = clazz.getName(); 
+
+		boolean folderExists = (new File(logFilePath)).isDirectory();
+		if (!folderExists)
+		{
+			(new File(logFilePath)).mkdirs();
+		}
+	}
+        
+        public void setLogger(int logLevel, String logFilePath, String logFileName, long logFileSize, Class<?> clazz)
 	{
 		
 		this.logLevel = logLevel;
 		this.logFilePath = logFilePath;
 		this.logFileName = logFileName;
 		this.logFileSize = logFileSize;
-		this.className = className; 
+		this.className = clazz.getName(); 
 
 		boolean folderExists = (new File(logFilePath)).isDirectory();
 		if (!folderExists)
