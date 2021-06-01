@@ -22,7 +22,7 @@ public final class Logger
 	private int logLevel = 1;	
 	private String logFileName = "sprintbot.ext.lib"; 	
 	private static final Event<logMessageEventDelegate> logMessageEvent = new Event<logMessageEventDelegate>();
-        private String className = ""; 
+        
 
         private static String getCurrentTimeStamp() 
         {
@@ -33,10 +33,9 @@ public final class Logger
         } 
         
         
-        public void setLogger(String logFileName, Class<?> clazz)
+        public void setLogger(String logFileName)
 	{				
-		this.logFileName = logFileName;		
-		this.className = clazz.getName(); 
+		this.logFileName = logFileName;				
 
 		boolean folderExists = (new File(logFilePath)).isDirectory();
 		if (!folderExists)
@@ -45,14 +44,13 @@ public final class Logger
 		}
 	}
         
-        public void setLogger(int logLevel, String logFilePath, String logFileName, long logFileSize, Class<?> clazz)
+        public void setLogger(int logLevel, String logFilePath, String logFileName, long logFileSize)
 	{
 		
 		this.logLevel = logLevel;
 		this.logFilePath = logFilePath;
 		this.logFileName = logFileName;
-		this.logFileSize = logFileSize;
-		this.className = clazz.getName(); 
+		this.logFileSize = logFileSize;		
 
 		boolean folderExists = (new File(logFilePath)).isDirectory();
 		if (!folderExists)
@@ -141,11 +139,9 @@ public final class Logger
 
 		// Write to log file
 		try
-		{
-                    if(className != null && className.length() > 0)
-                        className = className + " : ";
+		{                   
                     
-                    String toLog = getCurrentTimeStamp() + " " + className + message + "\n";
+                    String toLog = getCurrentTimeStamp() + " " + message + "\n";
                      
                     File f = new File(logFile);
                     if(!f.exists()){

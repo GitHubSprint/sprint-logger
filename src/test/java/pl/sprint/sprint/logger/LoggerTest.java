@@ -20,10 +20,10 @@ public class LoggerTest {
     
     @BeforeAll
     static void initAll() {
-        Logger.getInstance().setLogger(LOGFILE,LoggerTest.class);
+        Logger.getInstance().setLogger(LOGFILE);
         
         //full init example
-        //Logger.getInstance().setLogger(1, "C:/Logs/", "LOGFILE", 10000000, LoggerTest.class);  
+        //Logger.getInstance().setLogger(1, "C:/Logs/", "LOGFILE", 10000000);  
     }        
     
     @Test
